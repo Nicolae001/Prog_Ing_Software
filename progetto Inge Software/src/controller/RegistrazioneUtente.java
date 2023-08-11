@@ -1,5 +1,8 @@
 package controller;
 import model.Utente;
+import model.Gestore;
+import model.Magazziniere;
+import model.AddettoPrenotazioni;
 
 public class RegistrazioneUtente {
 	
@@ -8,7 +11,7 @@ public class RegistrazioneUtente {
 	private String ruolo;
 	
 	
-	private RegistrazioneUtente(String nome, String pswd, String ruolo) {
+	public RegistrazioneUtente(String nome, String pswd, String ruolo) {
 		
 		this.nome=nome;
 		password=pswd;
@@ -17,11 +20,17 @@ public class RegistrazioneUtente {
 	
 	private Utente creaUtente(){
 		Utente res=null;
-		//da implementare
+		if(ruolo.toLowerCase().equals("gestore"))
+			res=Gestore.creaGestore(nome, password);
+		if(ruolo.toLowerCase().equals("magazziniere"))
+			res=new Magazziniere(nome, password);
+		if(ruolo.toLowerCase().matches("addetto .*"))
+				res= new AddettoPrenotazioni(nome, password);
 		return res;
 	}
 	
-	public void registraUtente() {
+	
+	public void registra() {
 		creaUtente();
 		//da implementare
 	}

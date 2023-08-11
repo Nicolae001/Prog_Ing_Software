@@ -9,7 +9,7 @@ public final class CaricoPersona {
 		valoreCarico=val;
 	}
 	
-	public static CaricoPersona impostaCarico() {
+	public static CaricoPersona initCarico() {
 		if(carico==null)
 			carico=new CaricoPersona(0);
 		return carico;

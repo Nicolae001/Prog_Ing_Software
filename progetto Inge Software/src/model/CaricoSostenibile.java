@@ -9,9 +9,9 @@ private static CaricoSostenibile carico=null;
 		valoreCarico=val;
 	}
 	
-	public static CaricoSostenibile impostaCarico() {
+	public static CaricoSostenibile impostaCarico(int val) {
 		if(carico==null)
-			carico=new CaricoSostenibile(0);
+			carico=new CaricoSostenibile(val);
 		return carico;
 	}
 	

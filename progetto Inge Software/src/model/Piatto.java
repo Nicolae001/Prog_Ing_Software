@@ -1,16 +1,25 @@
 package model;
-import java.time.LocalTime;
+import java.time.LocalDate;
 
 public class Piatto implements Selezionabile {
 
 	private Ricetta ricetta;
-	private LocalTime dataInizio;
-	private LocalTime dataFine;
+	private String denominazione;
+	private LocalDate dataInizio;
+	private LocalDate dataFine;
 	
-	public Piatto(Ricetta ric, LocalTime ini, LocalTime fine ) {
-		ricetta=ric;
+	public Piatto(String nome, LocalDate ini, LocalDate fine ) {
+		denominazione=nome;
 		dataInizio=ini;
 		dataFine=fine;
+	}
+
+	public String getDenominazione() {
+		return denominazione;
+	}
+
+	public void setDenominazione(String denominazione) {
+		this.denominazione = denominazione;
 	}
 
 	public Ricetta getRicetta() {
@@ -21,19 +30,19 @@ public class Piatto implements Selezionabile {
 		this.ricetta = ricetta;
 	}
 
-	public LocalTime getDataInizio() {
+	public LocalDate getDataInizio() {
 		return dataInizio;
 	}
 
-	public void setDataInizio(LocalTime dataInizio) {
+	public void setDataInizio(LocalDate dataInizio) {
 		this.dataInizio = dataInizio;
 	}
 
-	public LocalTime getDataFine() {
+	public LocalDate getDataFine() {
 		return dataFine;
 	}
 
-	public void setDataFine(LocalTime dataFine) {
+	public void setDataFine(LocalDate dataFine) {
 		this.dataFine = dataFine;
 	}
 	

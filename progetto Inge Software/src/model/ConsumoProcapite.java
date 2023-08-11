@@ -3,7 +3,7 @@ import java.util.HashMap;
 
 abstract class ConsumoProcapite<G> {
 	
-	private HashMap<G,Double> consumi=new HashMap<G,Double>();
+	protected HashMap<G,Double> consumi=new HashMap<G,Double>();
 	
 	public ConsumoProcapite() {
 		
