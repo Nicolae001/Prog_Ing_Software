@@ -49,12 +49,13 @@ public class OperazioniMagazziniere {
 	
 	private Ingrediente[] estraiIngred(HashMap<Ingrediente, Double> arg) {
 		Set<Ingrediente> set=arg.keySet();
-		Ingrediente[] res= set.toArray(new Ingrediente[0]);
+		Ingrediente[] res= set.toArray(new Ingrediente[set.size()]);
 		return res;
 	}
 	
 	private Double[] estraiQta(HashMap<Ingrediente, Double> arg) {
-		Double[] res=arg.values().toArray(new Double[0]);
+		Set<Ingrediente> set=arg.keySet();
+		Double[] res=set.toArray(new Double[set.size()]);
 		return res;
 	}
 	

@@ -3,6 +3,7 @@ import model.*;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.ArrayList;
+import java.util.Set;
 
 public class ControlloreCoerenza {
 	
@@ -18,7 +19,8 @@ public class ControlloreCoerenza {
 	private static boolean coerenzaOrdine(Prenotazione p) {
 		int num=p.getNumCoperti();
 		HashMap<Selezionabile,Integer> sel=p.getSelezioni();
-		Integer [] val=sel.values().toArray(new Integer[0]);
+		Set<Selezionabile> set=sel.keySet();
+		Integer [] val=set.toArray(new Integer[set.size()]);
 		int tot=0;
 		for(Integer v:val)
 			tot+=v;
