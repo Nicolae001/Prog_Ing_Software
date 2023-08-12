@@ -1,6 +1,5 @@
 package model;
 import java.util.HashMap;
-import java.util.ArrayList;
 import java.time.LocalDate;
 
 public class Prenotazione {
@@ -10,6 +9,16 @@ public class Prenotazione {
 	private LocalDate data;
 	private HashMap<Selezionabile,Integer> selezioni = new HashMap<Selezionabile, Integer>();
 	
+	
+	public Prenotazione(String nome, int num, LocalDate data, HashMap<Selezionabile,Integer> sel) {
+		nomeCliente=nome;
+		numCoperti=num;
+		this.data=data;
+		selezioni=sel;
+	}
+	
+
+	
 	public HashMap<Selezionabile, Integer> getSelezioni() {
 		return selezioni;
 	}
@@ -18,27 +27,6 @@ public class Prenotazione {
 		this.selezioni = selezioni;
 	}
 
-	private static ArrayList<Prenotazione> listaPrenotazioni=new ArrayList<Prenotazione>();
-	
-	private Prenotazione(String nome, int num, LocalDate data, HashMap<Selezionabile,Integer> sel) {
-		nomeCliente=nome;
-		numCoperti=num;
-		this.data=data;
-		selezioni=sel;
-	}
-	
-	public static void creaPrenotazione(String nome, int num, LocalDate data, HashMap<Selezionabile,Integer> sel) {
-		Prenotazione p= new Prenotazione(nome, num,data, sel);
-		listaPrenotazioni.add(p);
-	}
-
-	public static void rimuoviPrenotazione(Prenotazione p) {
-		listaPrenotazioni.remove(p);
-	}
-	
-	public static Prenotazione getPrenotazione(int num) {
-		return listaPrenotazioni.get(num);
-	}
 
 	public String getNomeCliente() {
 		return nomeCliente;

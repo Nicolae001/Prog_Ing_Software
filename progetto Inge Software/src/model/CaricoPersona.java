@@ -22,4 +22,8 @@ public final class CaricoPersona {
 	public void setValoreCarico(int val) {
 		valoreCarico=val;
 	}
+	
+	public void eliminaCarico() {
+		carico=null;
+	}
 }

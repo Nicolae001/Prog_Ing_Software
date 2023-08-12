@@ -20,6 +20,10 @@ public class LogicaRegistroMagazzino {
 		return gestore;
 	}
 	
+	public void eliminaRegistro() {
+		gestore=null;
+	}
+	
 	public void preleva(Magazziniere m, GenereAlimentare alim, Double qta, Causa c) {
 		//da implementare
 	}
@@ -28,15 +32,15 @@ public class LogicaRegistroMagazzino {
 		//da implementare
 	}
 	
-	public void aggiungi(Magazziniere m,GenereAlimentare alim, Double qta,Causa c){
+	public synchronized void aggiungi(Magazziniere m,GenereAlimentare alim, Double qta,Causa c){
 		//da implementare
 	}
 	
-	public void aggiungi(Magazziniere m,GenereAlimentare[] alim, Double[] qta, Causa c){
+	public synchronized void aggiungi(Magazziniere m,GenereAlimentare[] alim, Double[] qta, Causa c){
 		//da implementare
 	}
 	
-	private void annota(Magazziniere m, int nota) {
+	private synchronized void annota(Magazziniere m, Causa c) {
 		//da implementare
 	}
 }

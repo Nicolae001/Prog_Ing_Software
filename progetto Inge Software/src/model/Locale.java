@@ -23,4 +23,8 @@ public class Locale {
 			System.out.println("Locale già creato");
 		return loc;
 	}
+	
+	public void eliminaLocale() {
+		loc=null;
+	}
 }

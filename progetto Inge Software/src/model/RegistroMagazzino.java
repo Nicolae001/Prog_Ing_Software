@@ -22,5 +22,9 @@ public class RegistroMagazzino {
 		this.giacenze = giacenze;
 	}
 	
+	public void eliminaRegistro() {
+		registro=null;
+	}
+	
 	
 }

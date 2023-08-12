@@ -30,4 +30,8 @@ public class GeneratoreListaSpesa {
 		//da implementare
 		return res;
 	}
+	
+	public void eliminaGeneratore() {
+		generatore=null;
+	}
 }

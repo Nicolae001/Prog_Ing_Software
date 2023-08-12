@@ -42,7 +42,7 @@ public class OperazioniGestore {
 		CaricoPersona c=CaricoPersona.initCarico();
 		c.setValoreCarico(carico);
 		int caricoComplessivo=c.getValoreCarico()*Locale.getLocale().getPosti()*120/100;
-		CaricoSostenibile.impostaCarico(caricoComplessivo);
+		CaricoSostenibile.initCarico().setValoreCarico(caricoComplessivo);
 		
 		
 	}

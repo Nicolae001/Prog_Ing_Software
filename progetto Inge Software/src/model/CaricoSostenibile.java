@@ -5,13 +5,11 @@ public final class CaricoSostenibile {
 	private int valoreCarico;
 private static CaricoSostenibile carico=null;
 	
-	private CaricoSostenibile(int val) {
-		valoreCarico=val;
-	}
+	private CaricoSostenibile() {}
 	
-	public static CaricoSostenibile impostaCarico(int val) {
+	public static CaricoSostenibile initCarico() {
 		if(carico==null)
-			carico=new CaricoSostenibile(val);
+			carico=new CaricoSostenibile();
 		return carico;
 	}
 	
@@ -22,5 +20,8 @@ private static CaricoSostenibile carico=null;
 	public void setValoreCarico(int val) {
 		valoreCarico=val;
 	}
-
+	
+	public void eliminaCarico() {
+		carico=null;
+	}
 }

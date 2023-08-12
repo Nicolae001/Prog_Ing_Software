@@ -52,5 +52,9 @@ public class CompilatoreRicette {
 		ListaRicette.getRicette().aggiungiElem(ric);
 	}
 	
+	public void eliminaCompilatore() {
+		compil=null;
+	}
+	
 	
 }

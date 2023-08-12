@@ -1,7 +1,7 @@
 package model;
 import java.util.ArrayList; 
 
-abstract class Lista<P> {
+public abstract class Lista<P> {
 	private ArrayList<P> lista=new ArrayList<P>();
 	
 	public synchronized void aggiungiElem(P elem) {
@@ -12,7 +12,7 @@ abstract class Lista<P> {
 		lista.remove(elem);
 	}
 	
-	public synchronized P getElem(int num) {
+	public P getElem(int num) {
 		return lista.get(num);
 	}
 	
@@ -20,5 +20,8 @@ abstract class Lista<P> {
 		return lista.size();
 	}
 	
+	public void setElem(P elem, int pos) {
+		lista.set(pos, elem);
+	}
 
 }

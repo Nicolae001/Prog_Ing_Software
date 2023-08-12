@@ -23,15 +23,15 @@ public class OperazioniPrenotazione {
 	}
 	
 	
-	public void registra() {
+	public void registra() throws Exception {
 		//da impelemetare
 	}
 	
-	public void modifica() {
+	public void modifica() throws Exception{
 		//da implementare
 	}
 	
-	public void cancella() {
+	public void cancella() throws Exception{
 		//da implementare
 	}
 }

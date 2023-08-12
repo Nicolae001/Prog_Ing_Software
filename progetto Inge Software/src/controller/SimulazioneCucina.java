@@ -33,4 +33,8 @@ public class SimulazioneCucina {
 	private void generaScarti() {
 		//da implementare
 	}
+	
+	public void eliminaCucina() {
+		cucina=null;
+	}
 }
