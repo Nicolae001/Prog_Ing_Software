@@ -27,6 +27,10 @@ public class Ricetta {
 		ingredienti.remove(ingr);
 	}
 	
+	public void modificaQta(Ingrediente ingr, Double qta) {
+		ingredienti.replace(ingr, qta);
+	}
+	
 
 	public int getPorzioni() {
 		return porzioni;

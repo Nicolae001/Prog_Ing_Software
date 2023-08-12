@@ -8,14 +8,16 @@ public class OperazioniGestore {
 	
 	private UtenteAutenticato utente;
 	private static OperazioniGestore gestore=null;
-	
+	private static CompilatoreRicette compilatore;
 	private OperazioniGestore(UtenteAutenticato u) {
 		utente=u;
 	}
 	
 	public static OperazioniGestore initGestore(UtenteAutenticato u) {
-		if(gestore==null)
+		if(gestore==null) {
 			gestore=new OperazioniGestore(u);
+			compilatore=CompilatoreRicette.initCompilatore(u);
+		}
 		return gestore;
 	}
 	
@@ -45,12 +47,11 @@ public class OperazioniGestore {
 		
 	}
 	
-	public void assegnaPosti(int num) throws Exception{
+	public void assegnaPosti(int num, Locale l) throws Exception{
 		if(!autenticato())
 			throw new AuthException();
 		if(!autorizzato()) 
 			throw new PermissionException();
-		Locale l=Locale.getLocale();
 		l.setPosti(num);
 		
 	}
@@ -106,5 +107,33 @@ public class OperazioniGestore {
 			System.out.println("Non si possono creare piatti con date di inizio e fine non ordinate");
 			return null;
 		}
+		
+	}
+	
+	public void creaRiecetta(Ingrediente[] ingr, Double[] qta, int porzioni, int[] caricoPorz) {
+		if(ingr.length!=qta.length) {
+			System.out.println("Non posso registrare questa ricetta. Ci deve essere corrispondenza"
+					+ " tra gli ingredienti e le rispettive quantità.");
+			return;
+		}
+		for(int i=0;i<ingr.length;i++) {
+			compilatore.aggiungiIngredienti(ingr[i], qta[i]);
+		}
+		try {
+			compilatore.aggiungiRicettario(compilatore.creaRicetta(porzioni, caricoPorz));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public MenuTematico creaMenuTema(String nome, String inizio, String fine, Piatto[] piatti) throws Exception {
+		if(!autenticato())
+			throw new AuthException();
+		if(!autorizzato()) 
+			throw new PermissionException();
+		MenuTematico res=null;
+		//da implementare
+		return res;
 	}
 }

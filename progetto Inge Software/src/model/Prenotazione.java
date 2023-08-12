@@ -9,6 +9,7 @@ public class Prenotazione {
 	private int numCoperti;
 	private LocalDate data;
 	private HashMap<Selezionabile,Integer> selezioni = new HashMap<Selezionabile, Integer>();
+	
 	public HashMap<Selezionabile, Integer> getSelezioni() {
 		return selezioni;
 	}

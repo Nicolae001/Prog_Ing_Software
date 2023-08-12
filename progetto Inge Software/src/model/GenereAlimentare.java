@@ -1,6 +1,6 @@
 package model;
 
-abstract class GenereAlimentare {
+public abstract class GenereAlimentare {
 	private String nome;
 	private String uniMisura;
 	private int qta;
