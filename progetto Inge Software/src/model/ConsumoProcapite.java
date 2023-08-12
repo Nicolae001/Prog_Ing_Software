@@ -21,6 +21,7 @@ abstract class ConsumoProcapite<G> {
 		consumi.put(elem, val);
 	}
 	
+	
 	public void rimuoviElem(G elem) {
 		consumi.remove(elem);
 	}

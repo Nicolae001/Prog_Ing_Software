@@ -1,6 +1,7 @@
 package controller;
-
-import model.Magazziniere;
+import model.Prenotazione;
+import model.AddettoPrenotazioni;
+import model.ListaPrenotazioni;
 
 public class OperazioniPrenotazione {
 		
@@ -17,14 +18,19 @@ public class OperazioniPrenotazione {
 	}
 	
 	private boolean autorizzato() {
-		if(utente!=null && utente.getUtente() instanceof Magazziniere)
+		if(utente!=null && utente.getUtente() instanceof AddettoPrenotazioni)
 			return true;
 		return false;
 	}
 	
 	
-	public void registra() throws Exception {
-		//da impelemetare
+	public void registra(Prenotazione p, ListaPrenotazioni lista ) throws Exception {
+		if(!autenticato())
+			throw new AuthException();
+		if(!autorizzato())
+			throw new PermissionException();
+		if(ControlloreCoerenza.coerenzaNuovaPrenot(p, lista))
+			lista.aggiungiElem(p);
 	}
 	
 	public void modifica() throws Exception{

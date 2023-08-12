@@ -57,36 +57,58 @@ public class OperazioniGestore {
 	}
 		
 	
-	public void initListaBevande() throws Exception {
+	public void initListaBevande(Bevanda [] bevande) throws Exception {
 		if(!autenticato())
 			throw new AuthException();
 		if(!autorizzato()) 
 			throw new PermissionException();
-		//da implementare
+		ListaBevande lista=ListaBevande.getListaBevande();
+		for(int i=0;i<bevande.length;i++)
+			lista.aggiungiElem(bevande[i]);
+		
+		
 	}
 	
-	public void initListaExtra() throws Exception {
+	public void initListaExtra(GenereExtra[] extra) throws Exception {
 		if(!autenticato())
 			throw new AuthException();
 		if(!autorizzato()) 
 			throw new PermissionException();
-		//da implementare
+		ListaExtra lista=ListaExtra.getListaExtra();
+		for(int i=0;i<extra.length;i++)
+			lista.aggiungiElem(extra[i]);
 	}
 	
-	public void initConsumoBevande() throws Exception {
+	public void initConsumoBevande(Bevanda[] lista,Double[] consumi) throws Exception {
 		if(!autenticato())
 			throw new AuthException();
 		if(!autorizzato()) 
 			throw new PermissionException();
-		// da implementare
+		ConsumoBevande consumo=ConsumoBevande.getConsumi();
+		if(lista.length!=consumi.length) {
+			System.out.println("Impossibile inizializzare lista bevande. Le lunghezze "
+					+ "degli argomenti devono essere uguali");
+			return;
+		}
+		for(int i=0;i<lista.length;i++)
+			consumo.aggiungiElem(lista[i], consumi[i]);
+			
+		
 	}
 	
-	public void initConsumoExtra() throws Exception {
+	public void initConsumoExtra(GenereExtra[] lista, Double[] consumi) throws Exception {
 		if(!autenticato())
 			throw new AuthException();
 		if(!autorizzato()) 
 			throw new PermissionException();
-		// da implementare
+		ConsumoExtra consumo=ConsumoExtra.getConsumi();
+		if(lista.length!=consumi.length) {
+			System.out.println("Impossibile inizializzare lista bevande. Le lunghezze "
+					+ "degli argomenti devono essere uguali");
+			return;
+		}
+		for(int i=0;i<lista.length;i++)
+			consumo.aggiungiElem(lista[i], consumi[i]);
 	}
 	
 	public void assegnaRiccettaPiatto(Ricetta ric, Piatto p) throws Exception{

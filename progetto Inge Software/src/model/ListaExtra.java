@@ -8,7 +8,7 @@ public class ListaExtra extends Lista<GenereExtra>{
 		
 	}
 	
-	public static ListaExtra getListaBevande() {
+	public static ListaExtra getListaExtra() {
 		if(lista==null)
 			lista=new ListaExtra();
 		return lista;

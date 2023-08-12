@@ -40,7 +40,9 @@ public class LogicaRegistroMagazzino {
 		//da implementare
 	}
 	
-	private synchronized void annota(Magazziniere m, Causa c) {
-		//da implementare
+	private synchronized void annota(Magazziniere m, GenereAlimentare[] alim, Double[] qta Causa c) {
+		StringBuilder sb=new StringBuilder();
+		
+		
 	}
 }
