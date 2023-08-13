@@ -1,6 +1,7 @@
 package controller;
 import java.util.HashMap;
 import model.GenereAlimentare;
+import model.RegistroMagazzino;
 
 public class GeneratoreListaSpesa {
 	
@@ -16,19 +17,20 @@ public class GeneratoreListaSpesa {
 	}
 	
 	private void acquistaDatiPrenotazioni() {
-		//da implementare
+		HashMap<GenereAlimentare, Double>
+	
 	}
 	
 	private void acquistaDatiGiacenze() {
 		//da implementare
 	}
 	
-	public HashMap<GenereAlimentare, Integer> genera(){
+	public void genera(){
 		acquistaDatiPrenotazioni();
 		acquistaDatiGiacenze();
 		HashMap<GenereAlimentare, Integer> res=null;
 		//da implementare
-		return res;
+		lista=res;
 	}
 	
 	public void eliminaGeneratore() {

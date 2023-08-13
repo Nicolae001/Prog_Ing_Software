@@ -1,5 +1,8 @@
 package controller;
 import model.Utente;
+import java.sql.Connection;
+import java.sql.Statement;
+import java.sql.ResultSet;
 import model.Gestore;
 import model.Magazziniere;
 import model.AddettoPrenotazioni;
@@ -30,9 +33,12 @@ public class RegistrazioneUtente {
 	}
 	
 	
-	public void registra() {
-		creaUtente();
-		//da implementare
+	public void registra(Connection c)throws Exception {
+		Utente u=creaUtente();
+		String cl=u.getClass().toString();
+		Statement st=c.createStatement();
+		ResultSet res=st.executeQuery("insert into utente set nome=\""+nome+"\", password=\""+password+"\", ruolo=\""+cl+"\";" );
+		res.close();
 	}
 
 	public String getNome() {
