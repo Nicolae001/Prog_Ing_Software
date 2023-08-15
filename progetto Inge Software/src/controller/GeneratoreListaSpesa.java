@@ -7,7 +7,7 @@ import model.*;
 public class GeneratoreListaSpesa {
 	
 	private static GeneratoreListaSpesa generatore=null;
-	private HashMap<GenereAlimentare,Integer> listaSpesa=new HashMap<GenereAlimentare, Integer>();
+	private ListaSpesa listaSpesa;
 	
 	private GeneratoreListaSpesa() {}
 	
@@ -166,10 +166,15 @@ public class GeneratoreListaSpesa {
 				res.put(key, qta.intValue()+1);
 		}
 			
-		listaSpesa=res;
+		listaSpesa.setLista(res);;
 	}
 	
 	public void eliminaGeneratore() {
 		generatore=null;
 	}
+	
+	public ListaSpesa getListaSpes(){
+		return listaSpesa;
+	}
 }
+
