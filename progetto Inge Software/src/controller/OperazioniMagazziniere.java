@@ -1,5 +1,6 @@
 package controller;
 import model.Magazziniere;
+import model.ListaSpesa;
 import model.Ingrediente;
 import model.GenereAlimentare;
 import model.Causa;
@@ -28,12 +29,15 @@ public class OperazioniMagazziniere {
 		return false;
 	}
 	
-	public  void acquista() throws Exception {
+	public  void acquista(ListaSpesa lista, LogicaRegistroMagazzino gestore) throws Exception {
 		if(!autenticato())
 			throw new AuthException();
 		if(!autorizzato())
 			throw new PermissionException();
-		//da implementare
+		Magazziniere m=(Magazziniere)utente.getUtente();
+		for(GenereAlimentare alim : lista.getLista().keySet())
+			gestore.aggiungi(m, alim, lista.getLista().get(alim).doubleValue(), Causa.ACQUISTO);
+		
 	}
 	
 	public void portaIngredientiCucina(Ingrediente[] ingr, Double[] qta, SimulazioneCucina cucina, LogicaRegistroMagazzino gestore) throws Exception{

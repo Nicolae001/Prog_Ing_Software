@@ -7,7 +7,7 @@ import model.*;
 public class GeneratoreListaSpesa {
 	
 	private static GeneratoreListaSpesa generatore=null;
-	private ListaSpesa listaSpesa;
+
 	
 	private GeneratoreListaSpesa() {}
 	
@@ -156,25 +156,24 @@ public class GeneratoreListaSpesa {
 	
 
 	
-	public void genera(){
+	public ListaSpesa genera(){
 		HashMap<GenereAlimentare, Double>necessario=acquistaDatiPrenotazioni(ListaPrenotazioni.initLista(),LocalDate.now());
 		HashMap<GenereAlimentare, Double>disponibile=RegistroMagazzino.creaRegistro().getGiacenze();
-		HashMap<GenereAlimentare, Integer> res=new HashMap<GenereAlimentare, Integer>();
+		HashMap<GenereAlimentare, Integer> diff=new HashMap<GenereAlimentare, Integer>();
 		for(GenereAlimentare key:necessario.keySet()) {
 			Double qta=necessario.get(key)-disponibile.get(key);
 			if(qta>0)
-				res.put(key, qta.intValue()+1);
+				diff.put(key, qta.intValue()+1);
 		}
-			
-		listaSpesa.setLista(res);;
+		ListaSpesa res=new ListaSpesa();	
+		res.setLista(diff);
+		return res;
 	}
 	
 	public void eliminaGeneratore() {
 		generatore=null;
 	}
 	
-	public ListaSpesa getListaSpes(){
-		return listaSpesa;
-	}
+	
 }
 
