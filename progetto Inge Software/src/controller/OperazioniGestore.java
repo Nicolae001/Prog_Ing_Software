@@ -62,7 +62,7 @@ public class OperazioniGestore {
 			throw new AuthException();
 		if(!autorizzato()) 
 			throw new PermissionException();
-		ListaBevande lista=ListaBevande.getListaBevande();
+		ListaBevande lista=ListaBevande.initListaBevande();
 		for(int i=0;i<bevande.length;i++)
 			lista.aggiungiElem(bevande[i]);
 		
@@ -84,7 +84,7 @@ public class OperazioniGestore {
 			throw new AuthException();
 		if(!autorizzato()) 
 			throw new PermissionException();
-		ConsumoBevande consumo=ConsumoBevande.getConsumi();
+		ConsumoBevande consumo=ConsumoBevande.initConsumi();
 		if(lista.length!=consumi.length) {
 			System.out.println("Impossibile inizializzare lista bevande. Le lunghezze "
 					+ "degli argomenti devono essere uguali");
@@ -101,7 +101,7 @@ public class OperazioniGestore {
 			throw new AuthException();
 		if(!autorizzato()) 
 			throw new PermissionException();
-		ConsumoExtra consumo=ConsumoExtra.getConsumi();
+		ConsumoExtra consumo=ConsumoExtra.initConsumi();
 		if(lista.length!=consumi.length) {
 			System.out.println("Impossibile inizializzare lista bevande. Le lunghezze "
 					+ "degli argomenti devono essere uguali");

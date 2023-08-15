@@ -36,4 +36,12 @@ public class MenuTematico extends Lista<Piatto> implements Selezionabile{
 	public void setNome(String nome) {
 		this.nome=nome;
 	}
+	
+	public Piatto[] getPiatti() {
+		return lista.toArray(new Piatto[lista.size()]);
+	}
+	
+	public Piatto getPiatto() {
+		return null;
+	}
 }

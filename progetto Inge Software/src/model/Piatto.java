@@ -46,5 +46,13 @@ public class Piatto implements Selezionabile {
 		this.dataFine = dataFine;
 	}
 	
+	public Piatto[] getPiatti() {
+		return null;
+	}
+	
+	public Piatto getPiatto() {
+		return this;
+	}
+	
 	
 }

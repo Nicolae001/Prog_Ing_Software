@@ -2,7 +2,7 @@ package model;
 import java.util.ArrayList; 
 
 public abstract class Lista<P> {
-	private ArrayList<P> lista=new ArrayList<P>();
+	protected ArrayList<P> lista=new ArrayList<P>();
 	
 	public synchronized void aggiungiElem(P elem) {
 		lista.add(elem);

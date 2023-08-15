@@ -8,7 +8,7 @@ public class ListaBevande extends Lista<Bevanda>{
 		
 	}
 	
-	public static ListaBevande getListaBevande() {
+	public static ListaBevande initListaBevande() {
 		if(lista==null)
 			lista=new ListaBevande();
 		return lista;

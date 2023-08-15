@@ -26,4 +26,7 @@ abstract class ConsumoProcapite<G> {
 		consumi.remove(elem);
 	}
 	
+	public HashMap<G,Double> getConsumi(){
+		return consumi;
+	}
 }

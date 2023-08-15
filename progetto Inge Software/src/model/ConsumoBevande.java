@@ -8,7 +8,7 @@ public class ConsumoBevande extends ConsumoProcapite<Bevanda>{
 			super();
 	}
 	
-	public static ConsumoBevande getConsumi() {
+	public static ConsumoBevande initConsumi() {
 		if(consumi==null)
 			consumi=new ConsumoBevande();
 		return consumi;

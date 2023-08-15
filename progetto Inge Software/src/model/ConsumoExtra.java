@@ -8,7 +8,7 @@ public class ConsumoExtra extends ConsumoProcapite<GenereExtra>{
 			super();
 	}
 	
-	public static ConsumoExtra getConsumi() {
+	public static ConsumoExtra initConsumi() {
 		if(consumi==null)
 			consumi=new ConsumoExtra();
 		return consumi;
