@@ -23,5 +23,8 @@ public abstract class Lista<P> {
 	public void setElem(P elem, int pos) {
 		lista.set(pos, elem);
 	}
-
+	
+	public ArrayList<P> getLista(){
+		return lista;
+	}
 }
