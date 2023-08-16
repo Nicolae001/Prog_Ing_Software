@@ -24,7 +24,7 @@ public class OperazioniPrenotazione {
 	}
 	
 	
-	public void registra(Prenotazione p, ListaPrenotazioni lista ) throws Exception {
+	public void registra(Prenotazione p, ListaPrenotazioni lista) throws Exception {
 		if(!autenticato())
 			throw new AuthException();
 		if(!autorizzato())

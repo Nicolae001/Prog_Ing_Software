@@ -1,12 +1,12 @@
 package controller;
-import model.Piatto;
-import java.util.ArrayList;
-import model.MenuCarta;
+import model.*;
+import java.time.LocalDate;
+
 
 public class GeneratoreMenu {
 	
 	private static GeneratoreMenu generatore=null;
-	private ArrayList<Piatto> piatti=new ArrayList<Piatto>();
+	private MenuCarta allaCarta;
 	
 	private GeneratoreMenu() {}
 	
@@ -16,19 +16,15 @@ public class GeneratoreMenu {
 		return generatore;
 	}
 	
-	public void aggiungiPiatto(Piatto p) {
-		piatti.add(p);
-	}
-	
-	public void aggiungiPiatto(Piatto[] p) {
-		for(int i=0;i<p.length;i++)
-			piatti.add(p[i]);
-	}
 	
 	public MenuCarta genera() {
-		MenuCarta res=null;
-		//da implementare
-		return res;
+		LocalDate oggi=LocalDate.now();
+		for(Piatto p:ListaPiatti.getPiatti().getLista()) {
+			if(p.getDataInizio().isBefore(oggi) && p.getDataFine().isAfter(oggi))
+				allaCarta.aggiungiElem(p);
+		}
+		
+		return allaCarta;
 	}
 	
 	

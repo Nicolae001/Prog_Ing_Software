@@ -9,10 +9,29 @@ public class ControlloreCoerenza {
 	
 	private ControlloreCoerenza() {}
 	
-	public static boolean coerenzaMenuTema(MenuTematico menu) {
-		boolean res=false;
-		//da implementare
-		return res;
+	private static boolean trovaInMenu(Piatto p, MenuCarta menu) {
+		for(Piatto key:menu.getLista()) {
+			boolean nomeOk=p.getDenominazione().equals(key.getDenominazione());
+			boolean inizioOk=p.getDataInizio().isEqual(key.getDataInizio())||p.getDataInizio().isAfter(key.getDataInizio());
+			boolean fineOk=p.getDataFine().isBefore(key.getDataFine())||p.getDataFine().isEqual(key.getDataFine());
+			if(nomeOk&&inizioOk&&fineOk) 
+				return true;
+		}
+		
+		return false;
+	}
+	
+	
+	public static boolean coerenzaMenuTema(Piatto[] piatti, MenuCarta menu, LocalDate ini, LocalDate fine) {;
+		double caricoTotale=0;
+		double caricoPorzione;
+		for(int i=0;i<piatti.length;i++) {
+			caricoPorzione=piatti[i].getRicetta().getCaricoLavoroPorz()[0]/piatti[i].getRicetta().getCaricoLavoroPorz()[1];
+			caricoTotale+=caricoPorzione;
+			if(!trovaInMenu(piatti[i], menu)||caricoTotale>4/3)
+				return false;
+		}
+		return true;
 	}
 	
 	
@@ -58,5 +77,6 @@ public class ControlloreCoerenza {
 			return false;
 		return true;
 	}
+	
 	
 }

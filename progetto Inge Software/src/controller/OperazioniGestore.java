@@ -42,7 +42,10 @@ public class OperazioniGestore {
 		CaricoPersona c=CaricoPersona.initCarico();
 		c.setValoreCarico(carico);
 		int caricoComplessivo=c.getValoreCarico()*Locale.getLocale().getPosti()*120/100;
-		CaricoSostenibile.initCarico().setValoreCarico(caricoComplessivo);
+		if(ControlloreModifiche.okModCarico(caricoComplessivo))
+			CaricoSostenibile.initCarico().setValoreCarico(caricoComplessivo);
+		else
+			System.out.println("Impossible modificare carico sostenibile, causa carico attuale delle prenotazioni\n");
 		
 		
 	}
@@ -52,6 +55,7 @@ public class OperazioniGestore {
 			throw new AuthException();
 		if(!autorizzato()) 
 			throw new PermissionException();
+		//se con il nuovo numero di posti si va a superare il caricoSostenibile non aggiornare
 		l.setPosti(num);
 		
 	}
@@ -87,7 +91,7 @@ public class OperazioniGestore {
 		ConsumoBevande consumo=ConsumoBevande.initConsumi();
 		if(lista.length!=consumi.length) {
 			System.out.println("Impossibile inizializzare lista bevande. Le lunghezze "
-					+ "degli argomenti devono essere uguali");
+					+ "degli argomenti devono essere uguali\n");
 			return;
 		}
 		for(int i=0;i<lista.length;i++)
@@ -104,7 +108,7 @@ public class OperazioniGestore {
 		ConsumoExtra consumo=ConsumoExtra.initConsumi();
 		if(lista.length!=consumi.length) {
 			System.out.println("Impossibile inizializzare lista bevande. Le lunghezze "
-					+ "degli argomenti devono essere uguali");
+					+ "degli argomenti devono essere uguali\n");
 			return;
 		}
 		for(int i=0;i<lista.length;i++)
@@ -116,6 +120,7 @@ public class OperazioniGestore {
 			throw new AuthException();
 		if(!autorizzato()) 
 			throw new PermissionException();
+		//se oggi viene servito almeno un piatto p e mancano gli ingredienti neccessari non procedere al cambio
 		p.setRicetta(ric);
 	}
 	
@@ -123,10 +128,13 @@ public class OperazioniGestore {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
 		LocalDate i=LocalDate.parse(inizio, formatter);
 		LocalDate f=LocalDate.parse(fine,formatter);
-		if(i.isBefore(f) || i.isEqual(f))
-			return new Piatto(nome,i,f);
+		if(i.isBefore(f) || i.isEqual(f)) {
+			Piatto p=new Piatto(nome,i,f);
+			ListaPiatti.getPiatti().aggiungiElem(p);
+			return p;
+		}
 		else {
-			System.out.println("Non si possono creare piatti con date di inizio e fine non ordinate");
+			System.out.println("Non si possono creare piatti con date di inizio e fine non ordinate\n");
 			return null;
 		}
 		
@@ -135,7 +143,7 @@ public class OperazioniGestore {
 	public void creaRiecetta(Ingrediente[] ingr, Double[] qta, int porzioni, int[] caricoPorz) {
 		if(ingr.length!=qta.length) {
 			System.out.println("Non posso registrare questa ricetta. Ci deve essere corrispondenza"
-					+ " tra gli ingredienti e le rispettive quantità.");
+					+ " tra gli ingredienti e le rispettive quantità.\n");
 			return;
 		}
 		for(int i=0;i<ingr.length;i++) {
@@ -154,8 +162,19 @@ public class OperazioniGestore {
 			throw new AuthException();
 		if(!autorizzato()) 
 			throw new PermissionException();
-		MenuTematico res=null;
-		//da implementare
+		MenuCarta carta=GeneratoreMenu.initGenMenu().genera();
+		 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy");
+		 LocalDate ini = LocalDate.parse(inizio, formatter);
+		 LocalDate fin = LocalDate.parse(fine, formatter);
+		 MenuTematico res=new MenuTematico(nome,ini,fin);
+		 if(ControlloreCoerenza.coerenzaMenuTema(piatti,carta, ini,fin)) {
+			for(int i=0;i<piatti.length;i++)
+				res.aggiungiElem(piatti[i]);
+		 }
+		 else {
+			 System.out.println("Impossibile creare menu tematico. I parametri passati non sono coerenti\n");
+			 return null;
+		 }
 		return res;
 	}
 }
