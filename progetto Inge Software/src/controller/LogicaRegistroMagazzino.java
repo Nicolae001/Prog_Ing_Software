@@ -3,7 +3,7 @@ import java.util.*;
 import model.RegistroMagazzino;
 import model.GenereAlimentare;
 import model.Magazziniere;
-import model.Causa;
+
 import java.time.LocalDateTime;
 
 

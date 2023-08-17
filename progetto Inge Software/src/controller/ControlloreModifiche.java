@@ -89,4 +89,29 @@ public class ControlloreModifiche {
 		}
 		return true;
 	}
+	
+	public static boolean okModPrenotazione(Prenotazione p, ListaPrenotazioni lista, LocalDate data) {
+		double carico=getCaricoPren(p);
+		for(Prenotazione key:lista.getLista()) {
+			if(key.getData().isEqual(data))
+				carico+=getCaricoPren(key);
+		}
+		if(carico>CaricoSostenibile.initCarico().getValoreCarico())
+			return false;
+		return true;
+	}
+	
+	public static boolean okModCoperti(Prenotazione p, ListaPrenotazioni lista, int num) {
+		if(num<p.getNumCoperti())
+			return true;
+		double carico=getCaricoPren(p)+CaricoPersona.initCarico().getValoreCarico()*12/10*(num-p.getNumCoperti());
+		for(Prenotazione key:lista.getLista()) {
+			if(key.getData().isEqual(p.getData())&& !key.equals(p))
+				carico+=getCaricoPren(key);
+		}
+		if(carico>CaricoSostenibile.initCarico().getValoreCarico())
+		return false;
+	return true;
+		
+	}
 }

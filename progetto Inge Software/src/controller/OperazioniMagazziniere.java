@@ -3,7 +3,7 @@ import model.Magazziniere;
 import model.ListaSpesa;
 import model.Ingrediente;
 import model.GenereAlimentare;
-import model.Causa;
+
 import java.util.Set;
 import java.util.HashMap;
 
@@ -40,7 +40,7 @@ public class OperazioniMagazziniere {
 		
 	}
 	
-	public void portaIngredientiCucina(Ingrediente[] ingr, Double[] qta, SimulazioneCucina cucina, LogicaRegistroMagazzino gestore) throws Exception{
+	public synchronized void portaIngredientiCucina(Ingrediente[] ingr, Double[] qta, SimulazioneCucina cucina, LogicaRegistroMagazzino gestore) throws Exception{
 		if(!autenticato())
 			throw new AuthException();
 		if(!autorizzato())
@@ -64,7 +64,7 @@ public class OperazioniMagazziniere {
 	}
 	
 	
-	public void portaIngredientiMag(SimulazioneCucina cucina, LogicaRegistroMagazzino gestore) throws Exception{
+	public synchronized void portaIngredientiMag(SimulazioneCucina cucina, LogicaRegistroMagazzino gestore) throws Exception{
 		
 		if(!autenticato())
 			throw new AuthException();
@@ -79,7 +79,7 @@ public class OperazioniMagazziniere {
 
 	}
 	
-	public void altriPrelievi(GenereAlimentare alim, Double qta, LogicaRegistroMagazzino gestore, Causa c) throws Exception {
+	public synchronized void  altriPrelievi(GenereAlimentare alim, Double qta, LogicaRegistroMagazzino gestore, Causa c) throws Exception {
 		if(!autenticato())
 			throw new AuthException();
 		if(!autorizzato())

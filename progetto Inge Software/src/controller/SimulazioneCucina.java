@@ -16,21 +16,29 @@ public class SimulazioneCucina {
 		return cucina;
 	}
 	
-	public void cucina(){
+	public void cucina(Piatto p, int porzioni){
 		//da implementare
 	}
 	
 	public synchronized void prendiIngredienti(Ingrediente[] ingr, Double[] qta) {
-		//da implementare
+		for(int i=0;i<ingr.length;i++) {
+			if(ingredienti.get(ingr[i])==null)
+				ingredienti.put(ingr[i], qta[i]);
+			else {
+				Double q=ingredienti.get(ingr[i]);
+				q=q+qta[i];
+				ingredienti.replace(ingr[i], q);
+			}
+		}
 	}
 	
 	public synchronized HashMap<Ingrediente, Double> ritornaIngrendienti() {
-		HashMap<Ingrediente, Double> res=null;
-		//da implementare
+		HashMap<Ingrediente, Double> res=ingredienti;
+		ingredienti=new HashMap<Ingrediente, Double>();
 		return res;
 	}
 	
-	private void generaScarti() {
+	private void generaScarti(Piatto p, int ) {
 		//da implementare
 	}
 	
