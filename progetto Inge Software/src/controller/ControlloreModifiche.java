@@ -1,6 +1,7 @@
 package controller;
 import java.time.LocalDate;
-
+import java.util.HashMap;
+import java.util.Set;
 import model.*;
 
 public class ControlloreModifiche {
@@ -32,12 +33,60 @@ public class ControlloreModifiche {
 	public static boolean okModCarico(int carico) {
 		double acc=0;
 		for(Prenotazione key:ListaPrenotazioni.initLista().getLista()) {
-			if(key.getData().isEqual(LocalDate.now()));
+			if(key.getData().isEqual(LocalDate.now()))
 				acc+=getCaricoPren(key);
 		}
 		
 		if(carico>acc)
 			return true;
 		return false;
+	}
+	
+	public static boolean okModPosti(int val, Locale l) {
+		int acc=0;
+		for(Prenotazione key:ListaPrenotazioni.initLista().getLista()) {
+			if(key.getData().isEqual(LocalDate.now()))
+				acc+=key.getNumCoperti();
+		}
+		if(val<acc)
+			return false;
+		return true;
+	}
+	
+	private static int getNumero(Piatto p) {
+		int res=0;
+		Set<Selezionabile> selez;
+		for(Prenotazione key:ListaPrenotazioni.initLista().getLista()) {
+			if(key.getData().isEqual(LocalDate.now())) {
+				selez=key.getSelezioni().keySet();
+				for(Selezionabile sel:selez) {
+					if(sel instanceof Piatto) {
+						if(sel.equals(p)) 
+							res+=key.getSelezioni().get(sel);
+					}
+					else {
+						for(int i=0;i<sel.getPiatti().length;i++) {
+							if(sel.getPiatti()[i].equals(p))
+								res+=key.getSelezioni().get(sel);
+						}
+					}
+						
+				}
+			}
+		}
+		return res;
+	}
+	
+	public static boolean okModRicetta(Piatto p,Ricetta ric){
+		RegistroMagazzino reg=RegistroMagazzino.creaRegistro();
+		HashMap<Ingrediente, Double> lista=ric.getIngredienti();
+		int num=getNumero(p);
+		for(Ingrediente ingr:lista.keySet()) {
+			boolean presente=reg.getGiacenze().get(ingr)!=null;
+			boolean sufficiente=reg.getGiacenze().get(ingr)>lista.get(ingr)*num;
+			if(!presente||!sufficiente) 
+				return false;
+		}
+		return true;
 	}
 }

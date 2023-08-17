@@ -55,8 +55,11 @@ public class OperazioniGestore {
 			throw new AuthException();
 		if(!autorizzato()) 
 			throw new PermissionException();
-		//se con il nuovo numero di posti si va a superare il caricoSostenibile non aggiornare
-		l.setPosti(num);
+		if(ControlloreModifiche.okModPosti(num,l))
+			l.setPosti(num);
+		else
+			System.out.println("Impossibile modificare numero posti. Il numero necessario per "
+					+ "soddisfare le prenotazioni effetuate deve essere superiore\n");
 		
 	}
 		
@@ -120,8 +123,11 @@ public class OperazioniGestore {
 			throw new AuthException();
 		if(!autorizzato()) 
 			throw new PermissionException();
-		//se oggi viene servito almeno un piatto p e mancano gli ingredienti neccessari non procedere al cambio
-		p.setRicetta(ric);
+		if(ControlloreModifiche.okModRicetta(p, ric))
+			p.setRicetta(ric);
+		else
+			System.out.println("Impossibile modificare la ricetta a causa dell'insufficienza degli"
+					+ "ingredienti in magazzino\n");
 	}
 	
 	public Piatto creaPiatto(String nome, String inizio, String fine) {
