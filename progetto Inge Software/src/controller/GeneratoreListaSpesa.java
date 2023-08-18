@@ -161,7 +161,7 @@ public class GeneratoreListaSpesa {
 		HashMap<GenereAlimentare, Double>disponibile=RegistroMagazzino.creaRegistro().getGiacenze();
 		HashMap<GenereAlimentare, Integer> diff=new HashMap<GenereAlimentare, Integer>();
 		for(GenereAlimentare key:necessario.keySet()) {
-			Double qta=necessario.get(key)-disponibile.get(key);
+			Double qta=11/10*necessario.get(key)-disponibile.get(key);
 			if(qta>0)
 				diff.put(key, qta.intValue()+1);
 		}

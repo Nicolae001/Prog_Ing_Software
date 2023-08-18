@@ -39,7 +39,7 @@ public class OperazioniPrenotazione {
 			lista.aggiungiElem(p);
 	}
 	
-	public void modificaData(Prenotazione p, ListaPrenotazioni lista, LocalDate data) throws Exception{
+	public void modificaData(Prenotazione p, ListaPrenotazioni lista, LocalDate data, int gg) throws Exception{
 		if(!autenticato())
 			throw new AuthException();
 		if(!autorizzato())
@@ -49,7 +49,7 @@ public class OperazioniPrenotazione {
 			return;
 		}
 		long diff=p.getData().toEpochDay()-LocalDate.now().toEpochDay();
-		if(diff<1) {
+		if(diff<gg) {
 			System.out.println("Impossibile modificare data. Giorni di preavviso insufficienti\n");
 			return;
 		}
@@ -87,12 +87,24 @@ public class OperazioniPrenotazione {
 		p.setSelezioni(selezioni);
 	}
 	
-	public void cancella(Prenotazione p, ListaPrenotazioni lista) throws Exception{
+	public void cancella(Prenotazione p, ListaPrenotazioni lista, int gg) throws Exception{
 		if(!autenticato())
 			throw new AuthException();
 		if(!autorizzato())
 			throw new PermissionException();
-		//da implementare
+		long diff=p.getData().toEpochDay()-LocalDate.now().toEpochDay();
+		if(diff<gg) {
+			System.out.println("Impossibile cancellare la prenotazione. Giorni di preavviso insufficienti\n");
+			return;
+		}
+		lista.rimuoviElem(p);
+	}
+	
+	protected void aggiornaListaPren(ListaPrenotazioni lista) {
+		for(Prenotazione p:lista.getLista()) {
+			if(p.getData().isBefore(LocalDate.now())||p.getData().isEqual(LocalDate.now()))
+				lista.rimuoviElem(p);
+		}
 	}
 }
 
